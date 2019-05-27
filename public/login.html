@@ -26,19 +26,22 @@
         <div class="login">
            <h2>ログイン</h2>
 
-           <form>
+           <form id="form_login" method="post" onsubmit="return entrar()">
            
-           Email: <input type="text" id="email" required>
+           Email: <input type="text" id="email" name="login" required>
            <br>
        
-           Senha: <input type="password" id="senha" required>
+           Senha: <input type="password" id="senha" name="senha" required>
            <br>
        
-           <button type="button" class="botao" onclick="enviar(email.value, senha.value)">Entrar</button>
+           <button type="button" class="botao" id="btn_entrar" onclick="enviar(email.value, senha.value)">Entrar</button>
            <br><br>
 
-           <div id="mensagem_erro"></div>
+           <img src="aguarde.gif" id="img_aguarde" style="display: none;">
 
+
+           <div id="mensagem_erro" style="display: none;">Usuário e/ou senha inválidos!</div>
+    
         </form>
         </div>
     <!-- DIV LOGIN -->
@@ -49,25 +52,52 @@
 
 
 <script>
-    function enviar(email, senha){
-        mensagem_erro.innerHTML = '';
+      verificarAutenticacao();
 
-
-        if(email == "usuario@gmail.com" && senha == "senha"){
-            window.location = "index.html"
-        }
-
-        else if(email == "" || senha == ""){
-            mensagem_erro.innerHTML = 'Todos os campos precisam ser preenchidos!';
-        }
-
-        else{
-            mensagem_erro.innerHTML = 'Dados Inválidos'
-        }
-
-
+function verificarAutenticacao() {
+    if (sessionStorage.usuario_bandtec != undefined) {
+        window.location.href = 'index.html';
     }
+}
 
+function entrar() {
+    aguardar();
+    var formulario = new URLSearchParams(new FormData(form_login));
+    fetch("/usuarios/entrar", {
+        method: "POST",
+        body: formulario
+    }).then(function (response) {
+        
+        if (response.ok) {
 
+            response.json().then(function (resposta) {
+
+                sessionStorage.usuario_bandtec = resposta.loginUser;
+                verificarAutenticacao();
+
+            });
+        } else {
+
+            console.log('Erro de login!');
+            finalizar_aguardar();
+        }
+    });
+
+    return false;
+}
+
+function aguardar() {
+    btn_entrar.disabled = true;
+    img_aguarde.style.display='block';
+    mensagem_erro.style.display='none';
+}
+
+function finalizar_aguardar() {
+    btn_entrar.disabled = false;
+    img_aguarde.style.display='none';
+    mensagem_erro.style.display='block';
+}
+
+ 
 
 </script>
