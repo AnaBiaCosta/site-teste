@@ -17,7 +17,7 @@ router.post('/entrar', function (req, res, next) {
     if (login == undefined || senha == undefined) {
       throw new Error(`Dados de login não chegaram completos: ${login} / ${senha}`);
     }
-    return banco.sql.query(`select * from cadastro where nomeCad='${login}' and senhaCad='${senha}'`);
+    return banco.sql.query(`select * from cadastro where emailCad='${login}' and senhaCad='${senha}'`);
   }).then(consulta => {
 
     console.log(`Usuários encontrados: ${JSON.stringify(consulta.recordset)}`);
@@ -58,7 +58,7 @@ router.post('/cadastrar', function (req, res, next) {
 	  // coloque a frase de erro que quiser aqui. Ela vai aparecer no formulário de cadastro
       throw new Error(`Dados de cadastro não chegaram completos: ${login} / ${senha} / ${nome}`);
     }
-    return banco.sql.query(`select count(*) as contagem from cadastro where login = '${login}'`);
+    return banco.sql.query(`select count(*) as contagem from cadastro where emailCad = '${login}'`);
   }).then(consulta => {
 
 	if (consulta.recordset[0].contagem >= 1) {

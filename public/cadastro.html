@@ -25,22 +25,22 @@
             <div class="cadastro" >
                <h2>登録</h2>
 
-            <form id="form_cadastro" method="post">
+            <form id="form_cadastro" method="post" onsubmit="return cadastrar()">
                 
                
                Nome: <input type="text" id="nome" name="nome" required>
                <br>
                
-               Email: <input type="text" id="email" name="login" required>
+               Email: <input type="text" id="login" name="login" required>
                <br>
            
                Senha: <input type="password" id="senha" name="senha" required>
                <br>
            
-               <button type="button" onclick="return cadastrar()" class="botao" id="btn_entrar">Cadastrar</button>
+               <button class="botao" id="btn_entrar">Cadastrar</button>
                <br><br>
 
-               <div id="img_aguarde" style="display: none"><img src="spinner.gif" alt=""></div>
+               <div id="img_aguarde" style="display: none"><img src="spinner.gif" ></div>
     
                <div id="div_erro"></div>
             </form>
