@@ -4,6 +4,11 @@ var router = express.Router();
 var banco = require('../app-banco');
 // não mexa nessas 3 linhas!
 
+
+
+router.get('/', function(req, res, next){
+  res.send('respond with a resource');
+});
 router.post('/entrar', function (req, res, next) {
   banco.conectar().then(() => {
     console.log(`Chegou p/ login: ${JSON.stringify(req.body)}`);
@@ -12,7 +17,7 @@ router.post('/entrar', function (req, res, next) {
     if (login == undefined || senha == undefined) {
       throw new Error(`Dados de login não chegaram completos: ${login} / ${senha}`);
     }
-    return banco.sql.query(`select * from user_nihongo where loginUser='${login}' and senhaUser='${senha}'`);
+    return banco.sql.query(`select * from cadastro where nomeCad='${login}' and senhaCad='${senha}'`);
   }).then(consulta => {
 
     console.log(`Usuários encontrados: ${JSON.stringify(consulta.recordset)}`);
@@ -32,6 +37,64 @@ router.post('/entrar', function (req, res, next) {
   }).finally(() => {
     banco.sql.close();
   });
+});
+
+
+
+
+router.post('/cadastrar', function (req, res, next) {
+
+  var nome;
+  var login;
+  var senha;
+  var cadastro_valido = false;
+
+  banco.conectar().then(() => {
+    console.log(`Chegou p/ cadastro: ${JSON.stringify(req.body)}`);
+	  nome = req.body.nome; // depois de .body, use o nome (name) do campo em seu formulário de login
+    login = req.body.login; // depois de .body, use o nome (name) do campo em seu formulário de login
+    senha = req.body.senha; // depois de .body, use o nome (name) do campo em seu formulário de login
+    if (login == undefined || senha == undefined || nome == undefined) {
+	  // coloque a frase de erro que quiser aqui. Ela vai aparecer no formulário de cadastro
+      throw new Error(`Dados de cadastro não chegaram completos: ${login} / ${senha} / ${nome}`);
+    }
+    return banco.sql.query(`select count(*) as contagem from cadastro where login = '${login}'`);
+  }).then(consulta => {
+
+	if (consulta.recordset[0].contagem >= 1) {
+		res.status(400).send(`Já existe usuário com o login "${login}"`);
+		return;
+    } else {
+		console.log('válido!');
+		cadastro_valido = true;
+	}
+
+  }).catch(err => {
+
+    var erro = `Erro no cadastro: ${err}`;
+    console.error(erro);
+    res.status(500).send(erro);
+
+  }).finally(() => {
+	  if (cadastro_valido) {		  
+			  
+		banco.sql.query(`insert into cadastro (nomeCad, emailCad, senhaCad) values ('${nome}','${login}','${senha}')`).then(function() {
+			console.log(`Cadastro criado com sucesso!`);
+			res.sendStatus(201); 
+			// status 201 significa que algo foi criado no back-end, 
+				// no caso, um registro de usuário ;)		
+		}).catch(err => {
+
+			var erro = `Erro no cadastro: ${err}`;
+			console.error(erro);
+			res.status(500).send(erro);
+
+		}).finally(() => {
+			banco.sql.close();
+		});
+	  }
+  });
+  
 
 });
 

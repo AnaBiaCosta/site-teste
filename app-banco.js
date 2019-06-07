@@ -2,7 +2,7 @@ var desenvolvimento = false;
 
 var configuracoes = {
     producao: {
-        server: "servidorharddesk.database.windows.net",
+        server: "vialactea.database.windows.net",
         user: "bandtec",
         password: "#Gf48875555800",
         database: "ADSBancoProjeto",
