@@ -15,43 +15,17 @@ var configuracoes = {
             idleTimeoutMillis: 30000,
             connectionTimeout: 5000
         }
-
-
     },
     desenvolvimento: {
-        server: "vialactea.database.windows.net",
-        user: "bandtec",
-        password: "#Gf48875555800",
-        database: "ADSBancoProjeto",
+        server: "BASETESTE.database.windows.net",
+        user: "usuariotestes",
+        password: "senhatestes",
+        database: "BASETESTE",
         options: {
             encrypt: true
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-//     },
-//     desenvolvimento: {
-//         server: "BASETESTE.database.windows.net",
-//         user: "usuariotestes",
-//         password: "senhatestes",
-//         database: "BASETESTE",
-//         options: {
-//             encrypt: true
-//         }
-//     }
-// }
  
 var sql = require('mssql');
 sql.on('error', err => {
