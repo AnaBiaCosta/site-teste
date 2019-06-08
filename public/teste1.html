@@ -14,7 +14,7 @@
 
     <!-- NAVBAR -->
         <ul>
-                <li style="float:left"><a href="">日本語を話しましょう!</a></li>
+                <li style="float:left"><a href="index.html">日本語を話しましょう!</a></li>
                 <li><a href="login.html">Login</a></li>
                 <li><a href="cadastro.html">Cadastro</a></li>
                 <li><a href="#sobre">Sobre</a></li>
@@ -75,6 +75,13 @@
                 Ver Pontuação</button><br><br>
 
                 <div id="resultado"></div>
+                
+
+
+
+
+
+
         </div>
 
         <div class="footer">
@@ -129,16 +136,43 @@
         // Resultados
 
         if(contador <= 4){
-            resultado.innerHTML = `Você aceitou ${contador}. Totoro não ficou feliz com sua nota (T^T)  頑張りましょう!`
+            resultado.innerHTML = `<table>
+                        <tr>
+                          <td><img src="img/triste.png" style= "width:300px; margin-left:100px;"></td>
+        
+                          <td class="resultado"><p>Você acertou ${contador}. <br>
+                                Totoro não ficou feliz com sua nota (T^T)  頑張りましょう!</p>
+                          </td> 
+        
+                        </tr>
+                </table>`
         }
 
         else if (contador > 4 && contador <=7){
-            resultado.innerHTML = `Você aceitou ${contador}. Totoro achou sua nota boa! Mas ainda dá para melhorar! #Fighting!`
+
+            resultado.innerHTML = `<table>
+                        <tr>
+                          <td><img src="img/normal.png" style= "width:200px; margin-left:100px;"></td>
+        
+                          <td class="resultado"><p>Você acertou ${contador}. <br>
+                            Totoro achou sua nota boa! Mas ainda dá para melhorar! #Fighting!</p>
+                          </td> 
+        
+                        </tr>
+                </table>`
         }
 
         else if (contador > 7){
-            resultado.innerHTML = `Você aceitou ${contador}. おめでとうございます!!! <br> <img style= "width:300px" src="img/95-958769_totoro-png.png"> `;
-
+            resultado.innerHTML = `<table>
+                        <tr>
+                          <td><img src="img/95-958769_totoro-png.png" style= "width:400px; margin-left:100px;"></td>
+        
+                          <td class="resultado"><p>Você acertou ${contador}. <br>
+                            おめでとうございます!!!
+                            </p>
+                          </td> 
+                        </tr>
+                </table>`
         }
     }
 

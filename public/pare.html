@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>日本語を話しましょう! - ESPERE!</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Nunito|Sawarabi+Gothic&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+     <!-- NAVBAR -->
+     <ul>
+            <li style="float:left"><a href="index.html">日本語を話しましょう!</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="cadastro.html">Cadastro</a></li>
+        </ul>
+
+
+    <!-- CORPO -->
+    <div class="espere">
+            <h2>ちょっとまって！</h2>
+
+            <table>
+                    <tr>
+                      <td><img class="img_espere" src="img/pare.png"></td>
+    
+                      <td class="texto"><p>Antes de prosseguir você <br> precisa fazer o login! <br><br>
+                                            Caso não seja cadastrado ainda, <br> cadastre-se!</p>
+                      </td> 
+                
+                    </tr>
+            </table>
+
+
+            <button type="button" onclick="login()" class="botao" style="margin-right: 10px">Login</button>
+            <button type="button" onclick="cadastro()" class="botao">Cadastro</button>
+
+         </div>
+
+
+
+         <div class="footer">
+                © 2019 日本語を話しましょう! - Todos os Direitos Reservados 
+        </div>
+</body>
+</html>
+
+
+<script>
+    function login(){
+    window.location = "login.html"
+    }
+
+    function cadastro(){
+    window.location = "cadastro.html"
+    }
+</script>

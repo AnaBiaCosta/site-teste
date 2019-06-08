@@ -27,6 +27,30 @@
 }
 
 
+.espere {
+    background-color: rgba(255, 255, 255, 0.699);
+    color: black;
+    margin-left: 20%;
+    margin-right: 20%;
+    text-align: center;
+    padding-block-end: 30px;
+    padding-bottom: 40px;
+    padding-top: 1px;
+    border-radius: 20px;
+    margin-bottom: 9.8%;
+    margin-top: 5%;
+}
+
+.img_espere{
+    width: 200px;
+    margin-left: 150px;
+}
+
+.texto{
+    text-align: center;
+    padding-left: 50px;
+}
+
 
 #mensagem_erro{
     margin-bottom: 20px;
